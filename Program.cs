@@ -7,7 +7,10 @@ namespace recursion
         static void Main()
         {
             // StringReverse();
-            Palindrome();
+            // Palindrome();
+            // Decimal2Binary();
+            // SumOfNaturalNumbers();
+            BinarySearch();
         }
         static void StringReverse()
         {
@@ -83,6 +86,76 @@ namespace recursion
 
 
             }
+        }
+
+        public static void Decimal2Binary()
+        {
+            Console.WriteLine("Enter a whole number that you want to convert to binary:");
+            int num = int.Parse(Console.ReadLine());
+            string result = "";
+            Console.WriteLine($"{num} as a binary is {getBinary(num, result)}");
+            static string getBinary(int num, string result)
+            {
+                if (num == 0)
+                    return result;
+                result = num % 2 + result;
+                return getBinary(num / 2, result);
+
+            }
+        }
+
+        public static void SumOfNaturalNumbers()
+        {
+            Console.WriteLine("Enter a natural number and I will Sum it:");
+            int num = int.Parse(Console.ReadLine());
+
+            Console.WriteLine($"The sum of {num} is {sumNum(num)}");
+
+            static int sumNum(int num)
+            {
+                if (num <= 1)
+                    return num;
+                return num + sumNum(num - 1);
+            }
+
+
+        }
+
+        public static void BinarySearch()
+        {
+            int[] A = { -3, 0, 2, 5, 7, 10, 11, 18, 22, 43, 56, 67 };
+
+            Console.WriteLine($"Given the array [-3, 0, 2, 5, 7, 10, 11, 18, 22, 43, 56, 67] pick a number and I will return its index:");
+            int num = int.Parse(Console.ReadLine());
+            int left = 0;
+            int right = A.Length - 1;
+
+            Console.WriteLine($"{num} is in index {binSearch(A, left, right, num)}");
+
+            static int binSearch(int[] A, int left, int right, int num)
+            {
+
+                if (left > right)
+                {
+                    return -1;
+                }
+
+                int mid = (left + right) / 2;
+
+                if (num == A[mid])
+                {
+                    return mid;
+                }
+
+                if (num < A[mid])
+                {
+                    return binSearch(A, left, mid - 1, num);
+                }
+
+                return binSearch(A, mid + 1, right, num);
+
+            }
+
         }
     }
 }
